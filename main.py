@@ -56,7 +56,7 @@ class Methods:
             try:
                 self.parse_f(f)
             except Exception:
-                print(f)
+                print(f)  # print file that occurred error
                 raise Exception
 
         for d in list_paths(dir, False):  # dirs
