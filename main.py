@@ -3,7 +3,6 @@ import hjson
 
 
 def get(stroke, start="", end=""):
-    stroke = stroke
     if start != "":
         stroke = stroke[stroke.find(start) + len(start):]
     if end != "" and (end in stroke):
@@ -64,7 +63,6 @@ class Methods:
 
 if __name__ == "__main__":
     m = Methods()
-    #  d = "C:\\Users\\mseli\\Desktop\\games\\Mindustry\\ммод\\Exotic-Mod-master"
     d = input("put json mod directory: ")
     while not os.path.isdir(d):
         d = input("\nthis is invalid directory.\nput valid json mod directory: ")
