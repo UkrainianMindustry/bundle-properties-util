@@ -70,7 +70,7 @@ if __name__ == "__main__":
     m = Methods()
     d = input("put json mod directory: ")
     while not os.path.isdir(d):
-        d = input("\nthis is invalid directory.\nукput valid json mod directory: ")
+        d = input("\nthis is invalid directory.\nput valid json mod directory: ")
 
     print()
     m.parse_a(d)
