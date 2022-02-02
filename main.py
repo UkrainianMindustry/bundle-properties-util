@@ -53,7 +53,12 @@ class Methods:
 
     def parse_d(self, dir):
         for f in list_paths(dir, True):  # files
-            self.parse_f(f)
+            try:
+                self.parse_f(f)
+            except Exception:
+                print(f)
+                raise Exception
+
         for d in list_paths(dir, False):  # dirs
             self.parse_d(d)
 
