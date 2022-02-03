@@ -2,10 +2,6 @@
 
 This is created to automate creating "bundle.properties" for mindustry json mods
 
-This utility uses external library "hjson" so install it too if you don't have
-
-`pip install hjson`
-
 To use just run "main.py", and it will ask you to put mod directory. Put it, example:
 
 put json mod directory: `C://Users/user/desktop/mods/mod`
