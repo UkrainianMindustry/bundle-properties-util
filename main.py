@@ -1,5 +1,5 @@
 import os
-import hjson
+import hjson_parser
 
 
 def get(stroke, start="", end=""):
@@ -23,7 +23,7 @@ class Methods:
     def parse_f(self, file):
         mod = ""
         if "mod." in file:
-            self.name = hjson.loads(open(file, "r").read())["name"]
+            self.name = hjson_parser.parser.parse(open(file, "r").read())["name"]
         if not ("content" in file): return
         if not ((".json" in file) or (".hjson" in file)): return
         name = get(file, "\\")
@@ -35,7 +35,7 @@ class Methods:
         p_type = get(file, start="content\\", end="\\")
         p_name = get(name, end=".")
 
-        file_dict = hjson.loads((open(file, "r").read() + "\n").replace("]\n", "\n]\n"))
+        file_dict = hjson_parser.parser.parse((open(file, "r").read() + "\n").replace("]\n", "\n]\n"))
 
         if "localizedName" in file_dict.keys():
             p_lname = "\"" + file_dict["localizedName"] + "\""
@@ -56,8 +56,7 @@ class Methods:
             try:
                 self.parse_f(f)
             except Exception:
-                print(f)  # print file that occurred error
-                raise Exception
+                raise Exception(f"in {f}")  # print file that occurred error
 
         for d in list_paths(dir, False):  # dirs
             self.parse_d(d)
