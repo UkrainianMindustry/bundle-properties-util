@@ -9,6 +9,7 @@ def get(stroke, start="", end=""):
 def remove(stroke, start="", end=""):
     start_i = stroke.find(start)
     end_i = start_i + stroke[start_i:].find(end)
+    if end == "": end_i = len(stroke)-1
     return stroke[:start_i] + stroke[end_i:]
 
 
@@ -78,11 +79,7 @@ def brackets(file_t):
                                 cut[0] = l
                                 cut[1] += 1
                     if not cut[1]:
-                        new_file_t += l  #
-                else:
-                    var_n += [l]
-                    cut[0] = l
-                    cut[1] += 1
+                        new_file_t += l
             else:
                 new_file_t += l
         else:
@@ -164,6 +161,8 @@ class parser:
                 raise Exception("invalid json, not found closing braket \"}\"")
         else:
             file_t = "{" + file_t + "}"
+
+        file_t = file_t.replace("'''", "'")
         return parser.parse_c(file_t)
 
     def __init__(self):
@@ -181,6 +180,16 @@ class dict_parser:
         t = new_file_t.split("\n")
         t = [remove_fc(i, (" ", "\n")) for i in t]
         t = [x for x in t if x]
+        t_t = []
+        i = 0
+        while i+1 < len(t):
+            if t[i][-1] == ":":
+                t_t.append(t[i]+t[i+1])
+                i += 2
+            else:
+                t_t.append(t[i])
+                i += 1
+        t = t_t
         k = []
         v = []
         print("log/dict_parser/parse_d [t]: ", t)

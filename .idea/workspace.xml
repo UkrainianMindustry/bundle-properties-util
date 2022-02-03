@@ -1,16 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="3cc3ce6e-c664-4019-9875-dcbb232f6393" name="Default Changelist" comment="small fixes in readme">
-      <change afterPath="$PROJECT_DIR$/.idea/Question012.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/hjson_parser.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+    <list default="true" id="3cc3ce6e-c664-4019-9875-dcbb232f6393" name="Default Changelist" comment="a lot of bugfixes, pixelcraft now can be parsed">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hjson_parser.py" beforeDir="false" afterPath="$PROJECT_DIR$/hjson_parser.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -157,7 +150,14 @@
       <option name="project" value="LOCAL" />
       <updated>1643832147313</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="a lot of bugfixes, pixelcraft now can be parsed">
+      <created>1643917853801</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1643917853801</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -176,6 +176,7 @@
     <MESSAGE value="upload" />
     <MESSAGE value="now u can see in which file was error" />
     <MESSAGE value="small fixes in readme" />
-    <option name="LAST_COMMIT_MESSAGE" value="small fixes in readme" />
+    <MESSAGE value="a lot of bugfixes, pixelcraft now can be parsed" />
+    <option name="LAST_COMMIT_MESSAGE" value="a lot of bugfixes, pixelcraft now can be parsed" />
   </component>
 </project>
