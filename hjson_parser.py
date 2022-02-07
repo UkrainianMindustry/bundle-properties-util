@@ -20,6 +20,7 @@ d = "{"
 l = "["
 t = "("
 test = -1#500 + 250 + 3
+log = False
 
 
 def remove_fs(string, ch):
@@ -43,11 +44,11 @@ def brackets(file_t):
     cut = ["", 0]
     var_n = []
     new_file_t = ""
-    print("log/brackets [file_t]: ", file_t)
+    if log: print("log/brackets [file_t]: ", file_t)
 
     for i in range(len(file_t)):
         l = file_t[i]
-        #  print("log/brackets/for [cut, l]: ", cut, l)
+        #  if log: print("log/brackets/for [cut, l]: ", cut, l)
         if not cut[1]:
             if file_t[i:i + 2] == "//":
                 var_n += [l]
@@ -97,7 +98,7 @@ def brackets(file_t):
             elif l == cut[0]:
                 cut[1] += 1
     var_n = [var for var in var_n if var[:2] != "//"]
-    print("log/brackets/end [new_file_t, var_n]: ", new_file_t, var_n, "\n--")
+    if log: print("log/brackets/end [new_file_t, var_n]: ", new_file_t, var_n, "\n--")
     return new_file_t, var_n
 
 
@@ -148,7 +149,7 @@ class string_parser:
 class parser:
 
     def parse_c(file_t):
-        print("log/parser/parse_c [file_t]: ", file_t, end="\n--------\n")
+        if log: print("log/parser/parse_c [file_t]: ", file_t, end="\n--------\n")
         if file_t[0] == q2 or file_t[0] == q1:
             return string_parser.parse_s(file_t)
         elif file_t[0] == d:
@@ -158,7 +159,9 @@ class parser:
         else:
             return file_t
 
-    def parse(file_t):
+    def parse(file_t, log_=False):
+        global log
+        log = log_
 
         file_t = remove_fc(file_t, ("\n", " ",)).replace("\t", " ")
 
@@ -198,15 +201,15 @@ class dict_parser:
         t = t_t
         k = []
         v = []
-        print("log/dict_parser/parse_d [t]: ", t)
+        if log: print("log/dict_parser/parse_d [t]: ", t)
         for i in t:
-            print("log/dict_parser/parse_d/for [i]: ", i, end="|\n")
+            if log: print("log/dict_parser/parse_d/for [i]: ", i, end="|\n")
             if ":" not in i: raise Exception(": not in " + i)
             k += [i.split(":")[0]]
             v += [i.split(":")[1]]
-            print("log/dict_parser/parse_d/for [k, v]: ", k, v)
+            if log: print("log/dict_parser/parse_d/for [k, v]: ", k, v)
 
-        print("log/dict_parser/parse_d [k, v]: ", k, "\n", v, end="\n----\n")
+        if log: print("log/dict_parser/parse_d [k, v]: ", k, "\n", v, end="\n----\n")
 
         file_d = dict(zip(k, v))
 

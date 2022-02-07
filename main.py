@@ -2,14 +2,6 @@ import os
 import hjson_parser
 
 
-def get(stroke, start="", end=""):
-    if start != "":
-        stroke = stroke[stroke.find(start) + len(start):]
-    if end != "" and (end in stroke):
-        stroke = stroke[0:stroke.find(end)]
-    return stroke
-
-
 def list_paths(directory, is_file):
     for path in os.listdir(directory):
         if os.path.isdir(directory + "\\" + path) != is_file:
@@ -19,6 +11,7 @@ def list_paths(directory, is_file):
 class Methods:
     name = ""
     bundle = []
+    category = ["", ""]
 
     def parse_f(self, file):
         mod = ""
@@ -26,16 +19,16 @@ class Methods:
             self.name = hjson_parser.parser.parse(open(file, "r").read())["name"]
         if not ("content" in file): return
         if not ((".json" in file) or (".hjson" in file)): return
-        name = get(file, "\\")
+        name = hjson_parser.get(file, "\\")
         n_n = name.count("\\")
         while n_n > 0:
             n_n = name.count("\\")
-            name = get(name, "\\")
+            name = hjson_parser.get(name, "\\")
 
-        p_type = get(file, start="content\\", end="\\")
-        p_name = get(name, end=".")
+        p_type = hjson_parser.get(file, start="content\\", end="\\")
+        p_name = hjson_parser.get(name, end=".")
 
-        file_dict = hjson_parser.parser.parse((open(file, "r").read() + "\n").replace("]\n", "\n]\n"))
+        file_dict = hjson_parser.parser.parse((open(file, "r").read() + "\n").replace("]\n", "\n]\n"), log_p)
 
         if "localizedName" in file_dict.keys():
             p_lname = file_dict["localizedName"]
@@ -52,6 +45,23 @@ class Methods:
             self.bundle.append(line_d.replace("\n", "\\n"))
 
     def parse_d(self, dir):
+        if "content\\" in dir:
+            new_category = ["", ""]
+            folder = hjson_parser.get(dir, "content\\")
+            new_category[0] = hjson_parser.get(folder, end="\\")
+            new_category[1] = hjson_parser.get(folder, new_category[0]+"\\", "\\")
+
+            NSOF = bool(len(self.bundle))  # Not Start Of File
+            if new_category[0] != self.category[0]:
+                self.bundle.append("\n\n"*NSOF+"# "+new_category[0].capitalize())
+
+            NFC = ([""]+self.bundle)[-1].replace("\n", "")[:2] != "# "   # Not First Category
+            if new_category[1] != self.category[1]:
+                if new_category[1] == "":
+                    new_category[1] = "other"
+                self.bundle.append("\n"*NFC+"## "+new_category[1].capitalize())
+            self.category = new_category
+
         for f in list_paths(dir, True):  # files
             try:
                 self.parse_f(f)
@@ -66,6 +76,9 @@ class Methods:
 
 
 if __name__ == "__main__":
+    log_p = False
+    log_s = True
+
     m = Methods()
     d = input("put json mod directory: ")
     while not os.path.isdir(d):
