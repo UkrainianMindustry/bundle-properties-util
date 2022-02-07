@@ -38,7 +38,7 @@ class Methods:
         file_dict = hjson_parser.parser.parse((open(file, "r").read() + "\n").replace("]\n", "\n]\n"))
 
         if "localizedName" in file_dict.keys():
-            p_lname = "\"" + file_dict["localizedName"] + "\""
+            p_lname = file_dict["localizedName"]
         else:
             p_lname = " ".join([n.capitalize() for n in p_name.split("-")])
 
@@ -47,9 +47,9 @@ class Methods:
         self.bundle.append(line_n)
 
         if "description" in file_dict.keys():
-            line_d = p_type + "." + self.name + "-" + p_name + ".description = \"" + file_dict["description"] + "\""
+            line_d = p_type + "." + self.name + "-" + p_name + ".description = " + file_dict["description"]
             # print(line_d)
-            self.bundle.append(line_d)
+            self.bundle.append(line_d.replace("\n", "\\n"))
 
     def parse_d(self, dir):
         for f in list_paths(dir, True):  # files

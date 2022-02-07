@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="3cc3ce6e-c664-4019-9875-dcbb232f6393" name="Default Changelist" comment="a lot of bugfixes, pixelcraft now can be parsed">
+    <list default="true" id="3cc3ce6e-c664-4019-9875-dcbb232f6393" name="Default Changelist" comment="few fixes for triple quotes on new line">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/hjson_parser.py" beforeDir="false" afterPath="$PROJECT_DIR$/hjson_parser.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -18,7 +19,6 @@
       </GitPushTagMode>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-    <option name="UPDATE_TYPE" value="REBASE" />
   </component>
   <component name="ProjectId" id="24Z8kThIIPGGI8lYb4lasu5aKvb" />
   <component name="ProjectViewState">
@@ -29,7 +29,7 @@
     <property name="ChangesTree.GroupingKeys" value="" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/input.txt" />
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
   <component name="RecentsManager">
@@ -97,14 +97,14 @@
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
+      <option name="REDIRECT_INPUT" value="true" />
+      <option name="INPUT_FILE" value="C:\Users\mseli\PycharmProjects\Question012\input.txt" />
       <method v="2" />
     </configuration>
     <list>
       <item itemvalue="Python.Unnamed" />
-      <item itemvalue="Python.main" />
       <item itemvalue="Python.hjson_parser" />
+      <item itemvalue="Python.main" />
     </list>
     <recent_temporary>
       <list>
@@ -157,7 +157,14 @@
       <option name="project" value="LOCAL" />
       <updated>1643917853801</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="few fixes for triple quotes and wuotes on next line">
+      <created>1643921123119</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1643921123119</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -177,6 +184,7 @@
     <MESSAGE value="now u can see in which file was error" />
     <MESSAGE value="small fixes in readme" />
     <MESSAGE value="a lot of bugfixes, pixelcraft now can be parsed" />
-    <option name="LAST_COMMIT_MESSAGE" value="a lot of bugfixes, pixelcraft now can be parsed" />
+    <MESSAGE value="few fixes for triple quotes on next line" />
+    <option name="LAST_COMMIT_MESSAGE" value="few fixes for triple quotes on next line" />
   </component>
 </project>

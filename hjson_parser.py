@@ -9,7 +9,7 @@ def get(stroke, start="", end=""):
 def remove(stroke, start="", end=""):
     start_i = stroke.find(start)
     end_i = start_i + stroke[start_i:].find(end)
-    if end == "": end_i = len(stroke)-1
+    if end == "": end_i = len(stroke) - 1
     return stroke[:start_i] + stroke[end_i:]
 
 
@@ -19,6 +19,7 @@ q1 = "'"
 d = "{"
 l = "["
 t = "("
+test = -1#500 + 250 + 3
 
 
 def remove_fs(string, ch):
@@ -38,7 +39,7 @@ def remove_fc(string, ch):
 
 
 def brackets(file_t):
-    tags = {"{": "}", "[": "]", "(": ")", "\"": "\"", "'": "'", "'''": "'''"}
+    tags = {"{": "}", "[": "]", "(": ")", "\"": "\"", "'": "'", "//": "\n"}
     cut = ["", 0]
     var_n = []
     new_file_t = ""
@@ -46,40 +47,43 @@ def brackets(file_t):
 
     for i in range(len(file_t)):
         l = file_t[i]
-        # print("log/brackets/for [cut, l]: ", cut, l)
+        #  print("log/brackets/for [cut, l]: ", cut, l)
         if not cut[1]:
-            if l in tags.keys():
-                if True:
-                    check_l = l
-                    ti = i
-                    hist = ""
-                    while ti > 0:
-                        if check_l not in (" ", "\t"):
-                            hist += check_l
-                        ti -= 1
-                        check_l = file_t[ti]
-                        if check_l in (":", "[", "(", "{"):
-                            break
-                    if ti == 0:
-                        hist = "{" + hist
-                    if check_l not in ("(", "["):
-                        if not hist[1:-1]:
+            if file_t[i:i + 2] == "//":
+                var_n += [l]
+                cut[0] = "//"
+                cut[1] += 1
+            elif l in tags.keys():
+                check_l = l
+                ti = i
+                hist = ""
+                while ti > 0:
+                    if check_l not in (" ", "\t"):
+                        hist += check_l
+                    ti -= 1
+                    check_l = file_t[ti]
+                    if check_l in (":", "[", "(", "{"):
+                        break
+                if ti == 0:
+                    hist = "{" + hist
+                if check_l not in ("(", "["):
+                    if not hist[1:-1]:
+                        var_n += [l]
+                        cut[0] = l
+                        cut[1] += 1
+                else:
+                    hist = hist.replace("\n", ",")
+                    if not hist[1:-1]:
+                        var_n += [l]
+                        cut[0] = l
+                        cut[1] += 1
+                    elif "," in hist:
+                        if not get(hist, "\"", ","):
                             var_n += [l]
                             cut[0] = l
                             cut[1] += 1
-                    else:
-                        hist = hist.replace("\n", ",")
-                        if not hist[1:-1]:
-                            var_n += [l]
-                            cut[0] = l
-                            cut[1] += 1
-                        elif "," in hist:
-                            if not get(hist, "\"", ","):
-                                var_n += [l]
-                                cut[0] = l
-                                cut[1] += 1
-                    if not cut[1]:
-                        new_file_t += l
+                if not cut[1]:
+                    new_file_t += l
             else:
                 new_file_t += l
         else:
@@ -87,10 +91,12 @@ def brackets(file_t):
             if l == tags[cut[0]]:
                 cut[1] -= 1
                 if cut[1] == 0:
-                    new_file_t += f"var_n{len(var_n)}_"
+                    if cut[0] != "//":
+                        new_file_t += f"var_n{len(var_n)}_"
                     cut[0] = ""
             elif l == cut[0]:
                 cut[1] += 1
+    var_n = [var for var in var_n if var[:2] != "//"]
     print("log/brackets/end [new_file_t, var_n]: ", new_file_t, var_n, "\n--")
     return new_file_t, var_n
 
@@ -140,6 +146,7 @@ class string_parser:
 
 
 class parser:
+
     def parse_c(file_t):
         print("log/parser/parse_c [file_t]: ", file_t, end="\n--------\n")
         if file_t[0] == q2 or file_t[0] == q1:
@@ -152,7 +159,6 @@ class parser:
             return file_t
 
     def parse(file_t):
-        file_t = remove(file_t+"\n", "//", "\n")
 
         file_t = remove_fc(file_t, ("\n", " ",)).replace("\t", " ")
 
@@ -182,9 +188,9 @@ class dict_parser:
         t = [x for x in t if x]
         t_t = []
         i = 0
-        while i+1 < len(t):
+        while i + 1 < len(t):
             if t[i][-1] == ":":
-                t_t.append(t[i]+t[i+1])
+                t_t.append(t[i] + t[i + 1])
                 i += 2
             else:
                 t_t.append(t[i])
@@ -195,6 +201,7 @@ class dict_parser:
         print("log/dict_parser/parse_d [t]: ", t)
         for i in t:
             print("log/dict_parser/parse_d/for [i]: ", i, end="|\n")
+            if ":" not in i: raise Exception(": not in " + i)
             k += [i.split(":")[0]]
             v += [i.split(":")[1]]
             print("log/dict_parser/parse_d/for [k, v]: ", k, v)
@@ -230,7 +237,7 @@ a: {b:"c"}, b: rt
 
 
 if __name__ == "__main__":
-    #file_t = """a: [a, {a:"w\nn"}]"""
-    #res = parser.parse(file_t)
+    # file_t = """a: [a, {a:"w\nn"}]"""
+    # res = parser.parse(file_t)
     res = remove("test1 //test2\n test3\n//test4", "//", "\n")
     print("output/main: \n", res)
