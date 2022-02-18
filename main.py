@@ -14,7 +14,6 @@ class Methods:
     category = ["", ""]
 
     def parse_f(self, file):
-        mod = ""
         if "mod." in file:
             self.name = hjson_parser.parser.parse(open(file, "r").read())["name"]
         if not ("content" in file): return
@@ -42,6 +41,10 @@ class Methods:
         if "description" in file_dict.keys():
             line_d = p_type + "." + self.name + "-" + p_name + ".description = " + file_dict["description"]
             # print(line_d)
+            self.bundle.append(line_d.replace("\n", "\\n"))
+
+        if "details" in file_dict.keys():
+            line_d = p_type + "." + self.name + "-" + p_name + ".details = " + file_dict["details"]
             self.bundle.append(line_d.replace("\n", "\\n"))
 
     def parse_d(self, dir):

@@ -19,7 +19,7 @@ q1 = "'"
 d = "{"
 l = "["
 t = "("
-test = -1#500 + 250 + 3
+test = -1  # 500 + 250 + 3
 log = False
 
 
@@ -103,6 +103,7 @@ def brackets(file_t):
 
 
 class list_parser:
+    @staticmethod
     def parse_l(file_t):
         if file_t[:1] in "[(" and file_t[-1:] in "])":
             file_t = file_t[1:-1]
@@ -148,6 +149,7 @@ class string_parser:
 
 class parser:
 
+    @staticmethod
     def parse_c(file_t):
         if log: print("log/parser/parse_c [file_t]: ", file_t, end="\n--------\n")
         if file_t[0] == q2 or file_t[0] == q1:
@@ -159,6 +161,7 @@ class parser:
         else:
             return file_t
 
+    @staticmethod
     def parse(file_t, log_=False):
         global log
         log = log_
@@ -180,6 +183,7 @@ class parser:
 
 
 class dict_parser:
+    @staticmethod
     def parse_d(file_t):
 
         new_file_t, var_n = brackets(file_t)
